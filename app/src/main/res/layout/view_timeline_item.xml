@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:background="@android:color/white"
+    tools:elevation="@dimen/elevation"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+    
+    <ImageView
+        android:id="@+id/ivCover"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_broken_image"
+        android:contentDescription="@string/content_item_image"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="10:11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@android:drawable/ic_menu_gallery"/>
+    
+    <ImageView
+        android:id="@+id/ivLabelSold"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/content_item_sold"
+        android:scaleType="fitCenter"
+        android:src="@drawable/badge_soldout"
+        app:layout_constraintDimensionRatio="38:22"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5"/>
+    
+    <ImageView
+        android:id="@+id/ivLikes"
+        style="@style/Timeline.Item.Icon"
+        android:contentDescription="@string/content_likes_counter"
+        android:src="@drawable/icon_like"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"/>
+    
+    <TextView
+        android:id="@+id/tvLikes"
+        style="@style/Timeline.Item.Value"
+        android:layout_width="0dp"
+        android:hint="@string/timeline_default_value"
+        app:layout_constraintStart_toEndOf="@+id/ivLikes"
+        tools:ignore="MissingConstraints"
+        tools:text="100"/>
+    
+    <ImageView
+        android:id="@+id/ivComments"
+        style="@style/Timeline.Item.Icon"
+        android:contentDescription="@string/content_comment_counter"
+        android:src="@drawable/icon_comment"
+        app:layout_constraintStart_toEndOf="@+id/tvLikes"
+        tools:ignore="MissingConstraints"/>
+    
+    <TextView
+        android:id="@+id/tvComments"
+        style="@style/Timeline.Item.Value"
+        android:layout_width="0dp"
+        android:hint="@string/timeline_default_value"
+        app:layout_constraintStart_toEndOf="@+id/ivComments"
+        tools:ignore="MissingConstraints"
+        tools:text="100"/>
+    
+    <TextView
+        android:id="@+id/tvPrice"
+        style="@style/Timeline.Item.Value"
+        android:layout_width="0dp"
+        android:gravity="end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvComments"
+        tools:text="$ 1,900"/>
+    
+    <View
+        android:id="@+id/viewForeground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/sel_clickable_trans"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+</merge>
