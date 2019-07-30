@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.viewpager.widget.ViewPager
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/viewPager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/timeline_men"/>
+        
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/timeline_all"/>
+        
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/timeline_women"/>
+    </com.google.android.material.tabs.TabLayout>
+    
+    <com.app.view.DecorFrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:clipToPadding="false"
+        android:padding="@dimen/spacing">
+        
+        <com.app.view.CustomActionButton
+            android:id="@+id/btnSell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@drawable/sel_exhibit"
+            android:elevation="@dimen/elevation"
+            android:foreground="@drawable/ripple_oval"
+            android:padding="@dimen/spacing_x2"
+            android:src="@drawable/ic_camera"
+            android:text="@string/timeline_sell"
+            android:textColor="@android:color/white"
+            android:tint="@android:color/white"
+            tools:ignore="UnusedAttribute"/>
+    </com.app.view.DecorFrameLayout>
+</androidx.viewpager.widget.ViewPager>
