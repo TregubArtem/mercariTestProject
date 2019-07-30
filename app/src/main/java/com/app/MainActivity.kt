@@ -2,27 +2,43 @@ package com.app
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.app.view.ITimelineItem
-import com.app.view.TimelineItemView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.ViewPager
+import com.app.TimelineType.AllTimeline
+import com.app.TimelineType.MenTimeline
+import com.app.TimelineType.WomenTimeline
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //        setContentView(R.layout.view_timeline_item)
+        setContentView(R.layout.fragment_timeline)
 
-        val view = TimelineItemView(this)
-        view.bind(object : ITimelineItem {
-            override val origin: Any = Unit
-            override val coverUri: String? =
-                "https://seekconz.corewebdna.net.au/web_images/blogs/216/1492/What%20recruiters%20look%20for%20in%20a%20cover%20letter_940x485.jpg"
-            override val soldOut: Boolean = true
-            override val likesCount: Int = 99
-            override val commentsCount: Int = 99999
-            override val priceUsd: Int = 1900
-        })
+        val adapter = TimelinePagerAdapter(supportFragmentManager) { getString(it) }
 
-        setContentView(view)
+        val viewPager = findViewById<ViewPager>(R.id.viewPager)
+        viewPager.adapter = adapter
+        viewPager.offscreenPageLimit = adapter.count
+        viewPager.currentItem = 1
+
         //        findViewById<View>(R.id.btnSell).setOnClickListener { }
     }
+}
+
+class TimelinePagerAdapter(
+    fm: FragmentManager,
+    private val stringResTransformation: (Int) -> String
+                          ) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+
+    private val timeline = arrayOf(MenTimeline, AllTimeline, WomenTimeline)
+
+    override fun getCount() = timeline.size
+
+    override fun getItem(position: Int): Fragment =
+        timeline[position].createFragment()
+
+    override fun getPageTitle(position: Int): CharSequence? =
+        stringResTransformation(timeline[position].titleRes)
 }
