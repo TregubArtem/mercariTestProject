@@ -10,6 +10,8 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import com.app.R
+import com.app.ui.BindingView
+import com.app.ui.expectation.ITimelineItem
 import com.squareup.picasso.Picasso
 import java.text.DecimalFormat
 
@@ -18,7 +20,8 @@ import java.text.DecimalFormat
  */
 class TimelineItemView
 @JvmOverloads
-constructor(context: Context, attrs: AttributeSet? = null) : ConstraintLayout(context, attrs), OnClickListener {
+constructor(context: Context, attrs: AttributeSet? = null) : ConstraintLayout(context, attrs),
+    BindingView<ITimelineItem>, OnClickListener {
 
     private val ivCover by lazyView<ImageView>(R.id.ivCover)
 
@@ -40,14 +43,14 @@ constructor(context: Context, attrs: AttributeSet? = null) : ConstraintLayout(co
     }
 
     /** Used to bind data to view, so the properties be presented to user */
-    fun bind(item: ITimelineItem) {
-        tag = item
+    override fun bind(data: ITimelineItem) {
+        tag = data
 
-        Picasso.get().load(item.coverUri).into(ivCover)
-        ivLabelSold.isVisible = item.soldOut
-        tvLikes.text = numberFormat.format(item.likesCount)
-        tvComments.text = numberFormat.format(item.commentsCount)
-        tvPrice.text = resources.getString(R.string.timeline_price_format, numberFormat.format(item.priceUsd))
+        Picasso.get().load(data.coverUri).into(ivCover)
+        ivLabelSold.isVisible = data.soldOut
+        tvLikes.text = numberFormat.format(data.likesCount)
+        tvComments.text = numberFormat.format(data.commentsCount)
+        tvPrice.text = resources.getString(R.string.timeline_price_format, numberFormat.format(data.priceUsd))
     }
 
     /** Overrated because of possibility to set single click listener to this view, so click will look fancy */
@@ -59,17 +62,4 @@ constructor(context: Context, attrs: AttributeSet? = null) : ConstraintLayout(co
         @Suppress("UNUSED_VARIABLE")
         val item = tag as ITimelineItem
     }
-}
-
-/**
- * This is expectation that will be applied explicitly and right away
- */
-interface ITimelineItem {
-    /** Original model, that can be used in future to transfer anywhere */
-    val origin: Any
-    val coverUri: String?
-    val soldOut: Boolean
-    val likesCount: Int
-    val commentsCount: Int
-    val priceUsd: Int
 }

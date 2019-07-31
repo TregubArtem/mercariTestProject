@@ -1,3 +1,10 @@
+# 2019-07-31
+* 45 minutes
+    * Implement base UI expectations and interfaces
+    * Implement basic API models
+    * Implement basic tabs and list fragments
+    * Group classes by packages
+
 # 2019-07-30
 * 45 minutes
     * Implement pager adapter for fragments
