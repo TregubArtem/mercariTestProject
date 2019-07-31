@@ -6,9 +6,6 @@
     <string name="content_likes_counter">Item\'s likes indicator</string>
     <string name="content_comment_counter">Item\'s comments count</string>
     
-    <string name="timeline_men">Men</string>
-    <string name="timeline_all">All</string>
-    <string name="timeline_women">Women</string>
     <string name="timeline_sell">Sell</string>
     <string name="timeline_default_value">0</string>
     <string name="timeline_price_format">$ %1$s</string>

@@ -1,4 +1,8 @@
 # 2019-07-31
+* 1 hour
+    * Add progress indicator for timeline tabs screen
+    * Implement view model for timeline tabs screen
+    * Setup REST client for API
 * 45 minutes
     * Implement base UI expectations and interfaces
     * Implement basic API models
