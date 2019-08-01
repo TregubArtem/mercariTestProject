@@ -13,14 +13,16 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import com.app.R
 import com.app.a.BaseFragment
+import com.app.a.bindView
 import com.app.a.lazyView
 import com.app.a.observe
 import com.app.a.withArguments
 import com.app.a.withViewModel
 import com.app.api.model.CategoryModel
+import com.app.databinding.FragmentTimelineBinding
 import com.app.ui.expectation.TimelineItem
-import com.app.view.TimelineItemView
-import com.app.view.TimelineItemViewHolder
+import com.app.view.item.TimelineItemView
+import com.app.view.item.TimelineItemViewHolder
 
 /** Class that describes view for timeline list */
 class TimelineFragment : BaseFragment<TimelineVM>(), OnRefreshListener {
@@ -35,7 +37,6 @@ class TimelineFragment : BaseFragment<TimelineVM>(), OnRefreshListener {
     }
 
     private val refreshLayout by lazyView<SwipeRefreshLayout>(R.id.refreshLayout)
-    private val recyclerView by lazyView<RecyclerView>(R.id.recyclerView)
 
     private val adapter by lazy { TimelineAdapter() }
 
@@ -52,16 +53,16 @@ class TimelineFragment : BaseFragment<TimelineVM>(), OnRefreshListener {
     }
 
     override fun onCreateView(i: LayoutInflater, parent: ViewGroup?, b: Bundle?): View? =
-        i.inflate(R.layout.fragment_timeline, parent, false)
+        bindView<FragmentTimelineBinding>(i, parent) {
+            it.adapter = adapter
+            it.layoutManager = GridLayoutManager(i.context, 2)
+        }
 
     override fun onViewCreated(v: View, b: Bundle?) {
         super.onViewCreated(v, b)
 
         refreshLayout.setColorSchemeColors(Color.RED, Color.GREEN, Color.BLUE)
         refreshLayout.setOnRefreshListener(this)
-
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = GridLayoutManager(v.context, 2)
     }
 
     override fun onSaveInstanceState(b: Bundle) {

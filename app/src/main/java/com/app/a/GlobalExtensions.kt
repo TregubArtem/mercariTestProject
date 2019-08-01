@@ -2,8 +2,11 @@ package com.app.a
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.IdRes
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle.Event.ON_DESTROY
 import androidx.lifecycle.LifecycleObserver
@@ -73,7 +76,7 @@ inline fun <reified T : ViewModel> Fragment.withViewModel(
         lifecycle.addObserver(vm)
 
     if (this is BaseFragment<*> && vm is BaseVM)
-        linkViewModel(vm)
+        attachViewModel(vm)
 
     vm.block()
     return vm
@@ -164,4 +167,53 @@ private class LazyFragmentView<V : View>(
     private fun clearReference() {
         view = null
     }
+}
+
+/**
+ * Method allow to obtain binding class in short way.
+ * Do not forget to add this part to proguard or wait for the crash
+ *
+ *   -keepclassmembers class * extends androidx.databinding.ViewDataBinding {
+ *   public static *** inflate(...);
+ *   }
+ *
+ * @param i inflater for view
+ * @param parent root view if exists
+ * @return required binding instance
+ */
+inline fun <reified B : ViewDataBinding> Class<B>.getBinding(i: LayoutInflater, parent: ViewGroup?): B {
+    val inflate = this.getMethod("inflate", LayoutInflater::class.java, ViewGroup::class.java, Boolean::class.java)
+    val binding = inflate.invoke(null, i, parent, false)
+
+    if (binding is B)
+        return binding
+    else
+        throw IllegalStateException("View binding error")
+}
+
+/**
+ * Method allow to obtain binding view and also attach it to somewhere
+ *
+ * @param i inflater for view
+ * @param parent root view if exists
+ * @param block where you can enable variables and other stuff
+ * @return required binding instance
+ */
+inline fun <reified B : ViewDataBinding> Any.bindView(
+    i: LayoutInflater,
+    parent: ViewGroup?,
+    block: (binding: B) -> Unit
+                                                     ): View {
+    val binding = B::class.java.getBinding(i, parent)
+
+    if (this is LifecycleOwner)
+        binding.setLifecycleOwner(this)
+
+    if (this is BaseFragment<*>)
+        attachViewDataBinding(binding)
+
+    block(binding)
+
+    binding.executePendingBindings()
+    return binding.root
 }

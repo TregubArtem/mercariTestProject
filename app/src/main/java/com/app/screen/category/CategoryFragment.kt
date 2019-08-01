@@ -24,6 +24,9 @@ import com.app.ui.expectation.CategoryTab
 class CategoryFragment : BaseFragment<CategoryVM>(), OnClickListener {
 
     companion object {
+
+        private const val EXTRA_CURRENT_ITEM_INDEX = "EXTRA_CURRENT_ITEM_INDEX"
+
         fun newInstance() = CategoryFragment()
     }
 
@@ -32,8 +35,13 @@ class CategoryFragment : BaseFragment<CategoryVM>(), OnClickListener {
 
     private val adapter by lazy { CategoryPagerAdapter(childFragmentManager) }
 
+    private var currentItem = -1
+
     override fun onCreate(b: Bundle?) {
         super.onCreate(b)
+
+        if (b != null)
+            currentItem = b.getInt(EXTRA_CURRENT_ITEM_INDEX)
 
         withViewModel({ CategoryVM() }) {
             observe(tabs, ::onTabsUpdate)
@@ -51,13 +59,21 @@ class CategoryFragment : BaseFragment<CategoryVM>(), OnClickListener {
         viewPager.adapter = adapter
     }
 
+    override fun onSaveInstanceState(b: Bundle) {
+        super.onSaveInstanceState(b)
+        b.putInt(EXTRA_CURRENT_ITEM_INDEX, viewPager.currentItem)
+    }
+
     private fun onTabsUpdate(list: List<CategoryTab>?) {
         val tabs = list ?: emptyList()
         adapter.bind(tabs)
 
         if (tabs.isNotEmpty()) {
+            if (currentItem == -1)
+                currentItem = tabs.size / 2
+
             viewPager.offscreenPageLimit = tabs.size
-            viewPager.currentItem = tabs.size / 2
+            viewPager.currentItem = currentItem
         }
     }
 

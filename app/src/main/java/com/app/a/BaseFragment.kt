@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.CallSuper
 import androidx.annotation.IdRes
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -16,6 +18,9 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
 
     protected lateinit var vm: VM
         private set
+
+    protected var binding: ViewDataBinding? = null
+        protected set
 
     override fun onCreate(b: Bundle?) {
         super.onCreate(b)
@@ -29,6 +34,11 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
         super.onViewCreated(v, b)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
+
     override fun onSaveInstanceState(b: Bundle) {
         super.onSaveInstanceState(b)
     }
@@ -39,7 +49,8 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
      * @param vm actual view model to attach
      */
     @Suppress("UNCHECKED_CAST")
-    fun linkViewModel(vm: BaseVM) {
+    @CallSuper
+    open fun attachViewModel(vm: BaseVM) {
         this.vm = vm as VM
 
         observe(vm.errorMessage) {
@@ -48,6 +59,16 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
 
             onErrorMessage(it.type, it.getString(ctx))
         }
+    }
+
+    /**
+     * Method used to attach view data binding to fragment in stealth mode
+     *
+     * @param binding actual view data binding to attach
+     */
+    @CallSuper
+    open fun attachViewDataBinding(binding: ViewDataBinding) {
+        this.binding = binding
     }
 
     /**

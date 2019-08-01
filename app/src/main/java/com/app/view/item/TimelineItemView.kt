@@ -1,4 +1,4 @@
-package com.app.view
+package com.app.view.item
 
 import android.content.Context
 import android.graphics.Color
@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.app.R
 import com.app.ui.BindingView
 import com.app.ui.expectation.TimelineItem
+import com.app.view.lazyView
 import com.squareup.picasso.Picasso
 import java.text.DecimalFormat
 

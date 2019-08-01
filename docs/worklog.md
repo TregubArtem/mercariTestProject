@@ -1,4 +1,7 @@
 # 2019-08-01
+* 30 minutes
+    * Start implement binding for timeline screen
+    * Implement view data binding abstraction
 * 15 minutes
     * Use repository with view model
     * Implement repository abstraction
