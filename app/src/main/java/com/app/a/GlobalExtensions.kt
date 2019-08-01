@@ -1,6 +1,7 @@
 package com.app.a
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.app.BuildConfig
+import com.crashlytics.android.Crashlytics
 import java.util.concurrent.TimeUnit
 
 inline fun <reified F : Fragment> withArguments(block: Bundle.() -> Unit): F {
@@ -28,7 +30,7 @@ inline fun <reified F : Fragment> withArguments(block: Bundle.() -> Unit): F {
     return fragment
 }
 
-fun whenDebug(block: () -> Unit) {
+inline fun whenDebug(block: () -> Unit) {
     if (BuildConfig.DEBUG)
         block()
 }
@@ -95,3 +97,15 @@ private class LazyFragmentView<V : View>(
 
 suspend inline fun TimeUnit.delay(duration: Long) =
     kotlinx.coroutines.delay(toMillis(duration))
+
+fun toLog(any: Any?, tag: String = "mLog") {
+    if (BuildConfig.DEBUG) {
+        Log.d(tag, any.toString())
+
+        if (any is Throwable)
+            any.printStackTrace()
+
+    } else if (any is Throwable) {
+        Crashlytics.logException(any)
+    }
+}

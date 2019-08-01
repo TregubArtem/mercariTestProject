@@ -1,8 +1,8 @@
 package com.app.api
 
 import com.app.a.whenDebug
+import com.app.api.model.CategoryModel
 import com.app.api.model.TimelineItemModel
-import com.app.api.model.TimelineModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level.BODY
@@ -16,10 +16,10 @@ import retrofit2.http.Url
  */
 interface IApi {
     /**
-     *  @return list of timeline tabs (see [TimelineModel])
+     *  @return list of timeline tabs (see [CategoryModel])
      */
     @GET(ApiPath.TABS)
-    suspend fun getTabs(): List<TimelineModel>
+    suspend fun getTabs(): List<CategoryModel>
 
     /**
      * @param source is uri to be called for retrieving the data

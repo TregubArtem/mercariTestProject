@@ -33,7 +33,7 @@ annotation class TimelineItemStatus {
 data class TimelineItemModel(
     val id: String,
     val name: String,
-    val photo: String,
+    val photo: String?,
     @TimelineItemStatus
     val status: String,
 

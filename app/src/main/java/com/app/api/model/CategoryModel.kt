@@ -9,7 +9,7 @@ import kotlinx.android.parcel.Parcelize
  * @param data url to get data for the tab's list
  */
 @Parcelize
-data class TimelineModel(
+data class CategoryModel(
     val name: String,
     val data: String
                         ) : Parcelable

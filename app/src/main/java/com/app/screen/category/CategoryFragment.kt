@@ -1,4 +1,4 @@
-package com.app.screen.timelineTabs
+package com.app.screen.category
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,49 +11,48 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.app.R
+import com.app.a.BaseFragment
 import com.app.a.lazyView
 import com.app.a.observe
 import com.app.a.withViewModel
-import com.app.screen.timelineList.TimelineListFragment
+import com.app.screen.timeline.TimelineFragment
 import com.app.ui.BindingView
-import com.app.ui.expectation.TimelineTab
+import com.app.ui.expectation.CategoryTab
 
 /**
  * Class that describes view for timeline list
  */
-class TimelineTabsFragment : Fragment(), OnClickListener {
+class CategoryFragment : BaseFragment<CategoryVM>(), OnClickListener {
 
     companion object {
-        fun newInstance() = TimelineTabsFragment()
+        fun newInstance() = CategoryFragment()
     }
-
-    private lateinit var vm: TimelineTabsViewModel
 
     private val viewPager by lazyView<ViewPager>(R.id.viewPager)
     private val progressBar by lazyView<View>(R.id.progressBar)
 
-    private val adapter by lazy { TimelinePagerAdapter(childFragmentManager) }
+    private val adapter by lazy { CategoryPagerAdapter(childFragmentManager) }
 
     override fun onCreate(b: Bundle?) {
         super.onCreate(b)
 
-        vm = withViewModel({ TimelineTabsViewModel() }) {
+        vm = withViewModel({ CategoryVM() }) {
             observe(tabs, ::onTabsUpdate)
             observe(showProgress, ::onShowProgress)
         }
     }
 
     override fun onCreateView(i: LayoutInflater, parent: ViewGroup?, b: Bundle?): View? =
-        i.inflate(R.layout.fragment_timeline_tabs, parent, false)
+        i.inflate(R.layout.fragment_category, parent, false)
 
-    override fun onViewCreated(view: View, b: Bundle?) {
-        super.onViewCreated(view, b)
+    override fun onViewCreated(v: View, b: Bundle?) {
+        super.onViewCreated(v, b)
 
-        view.findViewById<View>(R.id.btnSell).setOnClickListener(this)
+        v.findViewById<View>(R.id.btnSell).setOnClickListener(this)
         viewPager.adapter = adapter
     }
 
-    private fun onTabsUpdate(list: List<TimelineTab>?) {
+    private fun onTabsUpdate(list: List<CategoryTab>?) {
         val tabs = list ?: emptyList()
         adapter.bind(tabs)
 
@@ -68,25 +67,32 @@ class TimelineTabsFragment : Fragment(), OnClickListener {
     }
 
     override fun onClick(v: View) {
+        val item = viewPager.currentItem
+        val tab = adapter.getCurrentTab(item)
+
+        @Suppress("UNUSED_VARIABLE")
+        val category = tab.origin
     }
 }
 
-private class TimelinePagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT),
-    BindingView<List<TimelineTab>> {
+private class CategoryPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT),
+    BindingView<List<CategoryTab>> {
 
-    private val tabs = mutableListOf<TimelineTab>()
+    private val tabs = mutableListOf<CategoryTab>()
 
-    override fun bind(data: List<TimelineTab>) {
+    override fun bind(data: List<CategoryTab>) {
         tabs.clear()
         tabs.addAll(data)
 
         notifyDataSetChanged()
     }
 
+    fun getCurrentTab(position: Int) = tabs[position]
+
     override fun getCount() = tabs.size
 
     override fun getItem(position: Int): Fragment =
-        TimelineListFragment.newInstance(tabs[position])
+        TimelineFragment.newInstance(tabs[position].origin)
 
     override fun getPageTitle(position: Int): CharSequence? =
         tabs[position].title

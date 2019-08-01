@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.app.R.id
-import com.app.screen.timelineTabs.TimelineTabsFragment
+import com.app.screen.category.CategoryFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(layout)
 
         if (b == null)
-            start(TimelineTabsFragment.newInstance())
+            start(CategoryFragment.newInstance())
     }
 
     fun start(fragment: Fragment, toBackStack: Boolean = false, container: Int = id.fragmentContainer) {
