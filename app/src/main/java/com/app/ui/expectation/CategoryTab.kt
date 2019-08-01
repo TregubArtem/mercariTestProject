@@ -7,6 +7,8 @@ import kotlinx.android.parcel.Parcelize
 
 /**
  * Expectation for tab element of category screen
+ *
+ * @param origin model that used like source of other properties
  */
 @Parcelize
 data class CategoryTab(

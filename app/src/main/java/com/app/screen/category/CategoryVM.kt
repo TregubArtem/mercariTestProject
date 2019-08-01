@@ -12,9 +12,7 @@ import com.app.api.Api
 import com.app.ui.expectation.CategoryTab
 import java.util.concurrent.TimeUnit
 
-/**
- * Class that provides data to view and handles state of representation for tabs screen
- */
+/** Class that provides data to view and handles state of representation for tabs screen */
 class CategoryVM : BaseVM() {
 
     private val tabsImpl = MutableLiveData<List<CategoryTab>>()

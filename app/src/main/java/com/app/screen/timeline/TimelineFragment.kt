@@ -22,9 +22,7 @@ import com.app.ui.expectation.TimelineItem
 import com.app.view.TimelineItemView
 import com.app.view.TimelineItemViewHolder
 
-/**
- * Class that describes view for timeline list
- */
+/** Class that describes view for timeline list */
 class TimelineFragment : BaseFragment<TimelineVM>(), OnRefreshListener {
 
     companion object {
@@ -47,7 +45,7 @@ class TimelineFragment : BaseFragment<TimelineVM>(), OnRefreshListener {
         @Suppress("RemoveExplicitTypeArguments")
         val category = (b ?: arguments)?.getParcelable<CategoryModel>(EXTRA_CATEGORY) as CategoryModel
 
-        vm = withViewModel({ TimelineVM(category) }) {
+        withViewModel({ TimelineVM(category) }) {
             observe(items, ::onItemsUpdate)
             observe(showProgress, ::onShowProgress)
         }
@@ -84,6 +82,7 @@ class TimelineFragment : BaseFragment<TimelineVM>(), OnRefreshListener {
     }
 }
 
+/** Required class to use with [ListAdapter] */
 private class TimelineDiffCallback : DiffUtil.ItemCallback<TimelineItem>() {
 
     override fun areItemsTheSame(oldItem: TimelineItem, newItem: TimelineItem): Boolean =
@@ -92,6 +91,7 @@ private class TimelineDiffCallback : DiffUtil.ItemCallback<TimelineItem>() {
     override fun areContentsTheSame(oldItem: TimelineItem, newItem: TimelineItem): Boolean = true
 }
 
+/** Class to help [RecyclerView] to show views. Exactly that is showing items for timeline list of some category. */
 private class TimelineAdapter : ListAdapter<TimelineItem, TimelineItemViewHolder>(TimelineDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimelineItemViewHolder =

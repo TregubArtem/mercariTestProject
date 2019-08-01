@@ -5,6 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 /**
  * Representation of tab label and it's list data
+ *
  * @param name label of the tab
  * @param data url to get data for the tab's list
  */

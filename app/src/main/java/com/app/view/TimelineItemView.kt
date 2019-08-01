@@ -16,9 +16,7 @@ import com.app.ui.expectation.TimelineItem
 import com.squareup.picasso.Picasso
 import java.text.DecimalFormat
 
-/**
- * Presentation of timeline element of the list
- */
+/** Presentation of timeline element of the list */
 class TimelineItemView
 @JvmOverloads
 constructor(context: Context, attrs: AttributeSet? = null) : ConstraintLayout(context, attrs),
@@ -36,9 +34,6 @@ constructor(context: Context, attrs: AttributeSet? = null) : ConstraintLayout(co
 
     init {
         View.inflate(context, R.layout.view_timeline_item, this)
-
-        val padding = resources.getDimensionPixelSize(R.dimen.spacing_d2)
-        setPadding(padding, padding, padding, padding)
 
         elevation = resources.getDimension(R.dimen.elevation)
         setBackgroundColor(Color.WHITE)
@@ -79,6 +74,7 @@ constructor(context: Context, attrs: AttributeSet? = null) : ConstraintLayout(co
 
 }
 
+/** Wrapper of view - used only with RecyclerView.Adapter */
 class TimelineItemViewHolder(view: TimelineItemView) : ViewHolder(view), BindingView<TimelineItem> {
 
     override fun bind(data: TimelineItem) {

@@ -14,14 +14,13 @@ import com.app.R
 import com.app.a.BaseFragment
 import com.app.a.lazyView
 import com.app.a.observe
+import com.app.a.whenDebug
 import com.app.a.withViewModel
 import com.app.screen.timeline.TimelineFragment
 import com.app.ui.BindingView
 import com.app.ui.expectation.CategoryTab
 
-/**
- * Class that describes view for timeline list
- */
+/** Class that describes view for timeline list */
 class CategoryFragment : BaseFragment<CategoryVM>(), OnClickListener {
 
     companion object {
@@ -36,7 +35,7 @@ class CategoryFragment : BaseFragment<CategoryVM>(), OnClickListener {
     override fun onCreate(b: Bundle?) {
         super.onCreate(b)
 
-        vm = withViewModel({ CategoryVM() }) {
+        withViewModel({ CategoryVM() }) {
             observe(tabs, ::onTabsUpdate)
             observe(showProgress, ::onShowProgress)
         }
@@ -72,9 +71,14 @@ class CategoryFragment : BaseFragment<CategoryVM>(), OnClickListener {
 
         @Suppress("UNUSED_VARIABLE")
         val category = tab.origin
+
+        whenDebug {
+            start(newInstance())
+        }
     }
 }
 
+/** Required class to help show tabs content with [ViewPager] */
 private class CategoryPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT),
     BindingView<List<CategoryTab>> {
 

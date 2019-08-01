@@ -7,13 +7,13 @@
     android:layout_height="wrap_content"
     tools:background="@android:color/white"
     tools:elevation="@dimen/elevation"
-    tools:padding="@dimen/spacing_d2"
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
     
     <ImageView
         android:id="@+id/ivCover"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_margin="@dimen/spacing_d2"
         android:background="@drawable/bg_broken_image"
         android:contentDescription="@string/content_item_image"
         android:scaleType="centerCrop"
@@ -31,8 +31,8 @@
         android:scaleType="fitCenter"
         android:src="@drawable/badge_soldout"
         app:layout_constraintDimensionRatio="38:22"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ivCover"
+        app:layout_constraintTop_toTopOf="@+id/ivCover"
         app:layout_constraintWidth_percent="0.5"/>
     
     <ImageView
@@ -40,7 +40,7 @@
         style="@style/Timeline.Item.Icon"
         android:contentDescription="@string/content_likes_counter"
         android:src="@drawable/icon_like"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ivCover"
         tools:ignore="MissingConstraints"/>
     
     <TextView
@@ -55,6 +55,7 @@
     <ImageView
         android:id="@+id/ivComments"
         style="@style/Timeline.Item.Icon"
+        android:layout_marginStart="@dimen/spacing_d4"
         android:contentDescription="@string/content_comment_counter"
         android:src="@drawable/icon_comment"
         app:layout_constraintStart_toEndOf="@+id/tvLikes"
@@ -74,7 +75,7 @@
         style="@style/Timeline.Item.Value"
         android:layout_width="0dp"
         android:gravity="end"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/ivCover"
         app:layout_constraintStart_toEndOf="@+id/tvComments"
         tools:text="$ 1,900"/>
     
@@ -86,5 +87,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone"/>
 </merge>

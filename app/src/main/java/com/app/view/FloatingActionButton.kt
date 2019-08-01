@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.withStyledAttributes
 import com.app.R
 
+/** To reach visual requirements there was no other way, but only to implement custom view */
 class FloatingActionButton
 @JvmOverloads
 constructor(context: Context, attrs: AttributeSet? = null) : ConstraintLayout(context, attrs) {

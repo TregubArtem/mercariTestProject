@@ -8,6 +8,8 @@ import kotlinx.android.parcel.Parcelize
 
 /**
  * Expectation for item of timeline list
+ *
+ * @param origin model that used like source of other properties
  */
 @Parcelize
 data class TimelineItem(

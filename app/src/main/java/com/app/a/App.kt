@@ -5,6 +5,7 @@ import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.answers.Answers
 import io.fabric.sdk.android.Fabric
 
+/** Root class that starts after application launched */
 @Suppress("unused")
 class App : Application() {
 

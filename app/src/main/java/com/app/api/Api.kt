@@ -11,9 +11,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Url
 
-/**
- * Interface that describe REST methods of server API
- */
+/** Interface that describe REST methods of server API */
 interface IApi {
     /**
      *  @return list of timeline tabs (see [CategoryModel])
@@ -31,6 +29,7 @@ interface IApi {
                        ): List<TimelineItemModel>
 }
 
+/** Implementation of API interface. Used like layer for singleton [Api] */
 private val apiImpl: IApi = run {
     val client = OkHttpClient.Builder()
 
@@ -47,4 +46,5 @@ private val apiImpl: IApi = run {
         .create(IApi::class.java)
 }
 
+/** Singleton for single place access to API methods */
 object Api : IApi by apiImpl

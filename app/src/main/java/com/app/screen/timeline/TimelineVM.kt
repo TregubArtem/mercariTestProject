@@ -15,6 +15,8 @@ import java.util.concurrent.TimeUnit
 
 /**
  * ViewModel for timeline screen - handle loading of list data
+ *
+ * @param category key model to know the source of data to be loaded
  */
 class TimelineVM(
     val category: CategoryModel
@@ -23,16 +25,22 @@ class TimelineVM(
     private val itemsImpl = MutableLiveData<List<TimelineItem>>()
     val items: LiveData<List<TimelineItem>> get() = itemsImpl
 
+    private suspend fun retrieveItems() {
+        whenDebug {
+            TimeUnit.SECONDS.delay(1)
+        }
+        itemsImpl %= Api.getList(category.data).map { TimelineItem(it) }
+    }
+
     @Suppress("unused")
     @OnLifecycleEvent(Event.ON_CREATE)
-    private fun retrieveItems() {
+    private fun retrieveItemsInitially() {
         if (itemsImpl.value == null) execute {
-            whenDebug {
-                TimeUnit.SECONDS.delay(1)
-            }
-            itemsImpl %= Api.getList(category.data).map { TimelineItem(it) }
+            retrieveItems()
         }
     }
 
-    fun reloadItems() = retrieveItems()
+    fun reloadItems() = execute {
+        retrieveItems()
+    }
 }

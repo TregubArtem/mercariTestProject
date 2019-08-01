@@ -4,9 +4,7 @@ import android.os.Parcelable
 import androidx.annotation.StringDef
 import kotlinx.android.parcel.Parcelize
 
-/**
- * Describes all possible variants for statuses of timeline item
- */
+/** Describes all possible variants for statuses of timeline item */
 @StringDef(TimelineItemStatus.ON_SALE, TimelineItemStatus.SOLD_OUT)
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.FIELD)
@@ -21,6 +19,7 @@ annotation class TimelineItemStatus {
 
 /**
  * Representation of element of the timeline list
+ *
  * @param id unique number of recording
  * @param name title of the element
  * @param photo uri to external resource to image

@@ -1,4 +1,9 @@
 # 2019-08-01
+* 1 hour
+    * Improve UI of timeline item
+    * Add more abstraction
+    * Improve behaviour
+    * Improve documentation
 * 1.5 hours
     * Complete with visual and API parts of the task
     * Implement timeline list screen
