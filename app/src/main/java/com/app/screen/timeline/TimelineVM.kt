@@ -8,8 +8,9 @@ import com.app.a.BaseVM
 import com.app.a.delay
 import com.app.a.remAssign
 import com.app.a.whenDebug
-import com.app.api.Api
 import com.app.api.model.CategoryModel
+import com.app.repository.TimelineRepository
+import com.app.repository.TimelineRepositoryImpl
 import com.app.ui.expectation.TimelineItem
 import java.util.concurrent.TimeUnit
 
@@ -17,9 +18,11 @@ import java.util.concurrent.TimeUnit
  * ViewModel for timeline screen - handle loading of list data
  *
  * @param category key model to know the source of data to be loaded
+ * @param repository source of timeline data
  */
 class TimelineVM(
-    val category: CategoryModel
+    val category: CategoryModel,
+    val repository: TimelineRepository = TimelineRepositoryImpl()
                 ) : BaseVM() {
 
     private val itemsImpl = MutableLiveData<List<TimelineItem>>()
@@ -29,7 +32,7 @@ class TimelineVM(
         whenDebug {
             TimeUnit.SECONDS.delay(1)
         }
-        itemsImpl %= Api.getList(category.data).map { TimelineItem(it) }
+        itemsImpl %= repository.getItems(category).map { TimelineItem(it) }
     }
 
     @Suppress("unused")

@@ -1,4 +1,7 @@
 # 2019-08-01
+* 15 minutes
+    * Use repository with view model
+    * Implement repository abstraction
 * 1 hour
     * Improve UI of timeline item
     * Add more abstraction
