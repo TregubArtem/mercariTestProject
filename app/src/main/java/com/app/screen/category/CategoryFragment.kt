@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.app.R
 import com.app.a.BaseFragment
+import com.app.a.attempt
 import com.app.a.lazyView
 import com.app.a.observe
 import com.app.a.whenDebug
@@ -59,20 +60,30 @@ class CategoryFragment : BaseFragment<CategoryVM>(), OnClickListener {
         viewPager.adapter = adapter
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        currentItem = viewPager.currentItem
+    }
+
     override fun onSaveInstanceState(b: Bundle) {
         super.onSaveInstanceState(b)
-        b.putInt(EXTRA_CURRENT_ITEM_INDEX, viewPager.currentItem)
+
+        attempt<TypeCastException> {
+            currentItem = viewPager.currentItem
+        }
+        b.putInt(EXTRA_CURRENT_ITEM_INDEX, currentItem)
     }
 
     private fun onTabsUpdate(list: List<CategoryTab>?) {
         val tabs = list ?: emptyList()
         adapter.bind(tabs)
+        val count = adapter.count
 
-        if (tabs.isNotEmpty()) {
+        if (count > 0) {
             if (currentItem == -1)
-                currentItem = tabs.size / 2
+                currentItem = count / 2
 
-            viewPager.offscreenPageLimit = tabs.size
+            viewPager.offscreenPageLimit = count
             viewPager.currentItem = currentItem
         }
     }
@@ -83,11 +94,11 @@ class CategoryFragment : BaseFragment<CategoryVM>(), OnClickListener {
 
     override fun onClick(v: View) {
         val item = viewPager.currentItem
-        val tab = adapter.getCurrentTab(item)
-
-        @Suppress("UNUSED_VARIABLE")
-        val category = tab.origin
-
+        if (item < adapter.count) {
+            val tab = adapter.getCurrentTab(item)
+            @Suppress("UNUSED_VARIABLE")
+            val category = tab.origin
+        }
         whenDebug {
             start(newInstance())
         }

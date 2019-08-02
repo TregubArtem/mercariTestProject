@@ -1,3 +1,8 @@
+# 2019-08-02
+* 30 minutes
+    * Complete wrapping of timeline screen with view binding
+    * Fix few crashes related to screen state change
+
 # 2019-08-01
 * 30 minutes
     * Start implement binding for timeline screen

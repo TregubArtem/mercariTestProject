@@ -69,6 +69,7 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
     @CallSuper
     open fun attachViewDataBinding(binding: ViewDataBinding) {
         this.binding = binding
+        binding.lifecycleOwner = this
     }
 
     /**

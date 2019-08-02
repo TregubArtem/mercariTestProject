@@ -206,9 +206,6 @@ inline fun <reified B : ViewDataBinding> Any.bindView(
                                                      ): View {
     val binding = B::class.java.getBinding(i, parent)
 
-    if (this is LifecycleOwner)
-        binding.setLifecycleOwner(this)
-
     if (this is BaseFragment<*>)
         attachViewDataBinding(binding)
 
@@ -216,4 +213,21 @@ inline fun <reified B : ViewDataBinding> Any.bindView(
 
     binding.executePendingBindings()
     return binding.root
+}
+
+/**
+ * Simple try-catch but more compact. Will throw exception that doesn't expected.
+ *
+ * @param tryBlock operation that should be performed carefully
+ * @throws Throwable that not expected
+ */
+inline fun <reified T : Throwable> attempt(tryBlock: () -> Unit) {
+    try {
+        tryBlock()
+
+    } catch (e: Throwable) {
+        toLog(e)
+        if (e !is T)
+            throw e
+    }
 }

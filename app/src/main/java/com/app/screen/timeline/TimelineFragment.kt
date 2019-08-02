@@ -1,31 +1,21 @@
 package com.app.screen.timeline
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
-import com.app.R
 import com.app.a.BaseFragment
 import com.app.a.bindView
-import com.app.a.lazyView
 import com.app.a.observe
 import com.app.a.withArguments
 import com.app.a.withViewModel
 import com.app.api.model.CategoryModel
 import com.app.databinding.FragmentTimelineBinding
 import com.app.ui.expectation.TimelineItem
-import com.app.view.item.TimelineItemView
-import com.app.view.item.TimelineItemViewHolder
 
 /** Class that describes view for timeline list */
-class TimelineFragment : BaseFragment<TimelineVM>(), OnRefreshListener {
+class TimelineFragment : BaseFragment<TimelineVM>() {
 
     companion object {
 
@@ -35,8 +25,6 @@ class TimelineFragment : BaseFragment<TimelineVM>(), OnRefreshListener {
             putParcelable(EXTRA_CATEGORY, category)
         }
     }
-
-    private val refreshLayout by lazyView<SwipeRefreshLayout>(R.id.refreshLayout)
 
     private val adapter by lazy { TimelineAdapter() }
 
@@ -48,22 +36,17 @@ class TimelineFragment : BaseFragment<TimelineVM>(), OnRefreshListener {
 
         withViewModel({ TimelineVM(category) }) {
             observe(items, ::onItemsUpdate)
-            observe(showProgress, ::onShowProgress)
         }
     }
 
     override fun onCreateView(i: LayoutInflater, parent: ViewGroup?, b: Bundle?): View? =
         bindView<FragmentTimelineBinding>(i, parent) {
+            it.isRefreshing = vm.showProgress
+            it.setRefreshListener(vm::reloadItems)
+
             it.adapter = adapter
             it.layoutManager = GridLayoutManager(i.context, 2)
         }
-
-    override fun onViewCreated(v: View, b: Bundle?) {
-        super.onViewCreated(v, b)
-
-        refreshLayout.setColorSchemeColors(Color.RED, Color.GREEN, Color.BLUE)
-        refreshLayout.setOnRefreshListener(this)
-    }
 
     override fun onSaveInstanceState(b: Bundle) {
         super.onSaveInstanceState(b)
@@ -73,31 +56,4 @@ class TimelineFragment : BaseFragment<TimelineVM>(), OnRefreshListener {
     private fun onItemsUpdate(list: List<TimelineItem>?) {
         adapter.submitList(list)
     }
-
-    private fun onShowProgress(show: Boolean?) {
-        refreshLayout.isRefreshing = show == true
-    }
-
-    override fun onRefresh() {
-        vm.reloadItems()
-    }
-}
-
-/** Required class to use with [ListAdapter] */
-private class TimelineDiffCallback : DiffUtil.ItemCallback<TimelineItem>() {
-
-    override fun areItemsTheSame(oldItem: TimelineItem, newItem: TimelineItem): Boolean =
-        oldItem == newItem
-
-    override fun areContentsTheSame(oldItem: TimelineItem, newItem: TimelineItem): Boolean = true
-}
-
-/** Class to help [RecyclerView] to show views. Exactly that is showing items for timeline list of some category. */
-private class TimelineAdapter : ListAdapter<TimelineItem, TimelineItemViewHolder>(TimelineDiffCallback()) {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimelineItemViewHolder =
-        TimelineItemView(parent.context).createViewHolder()
-
-    override fun onBindViewHolder(holder: TimelineItemViewHolder, position: Int) =
-        holder.bind(getItem(position))
 }
