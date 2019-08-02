@@ -21,7 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        android:elevation="@dimen/elevation">
+        android:elevation="@dimen/elevation"
+        tools:background="@android:color/darker_gray">
         
         <ImageView
             android:id="@+id/ivCover"
@@ -38,7 +39,23 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@android:drawable/ic_menu_gallery"/>
         
-        <!--TODO: show name of item-->
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:padding="@dimen/spacing_d2"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="10"
+            android:text="@{item.name}"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="@id/ivCover"
+            app:layout_constraintEnd_toEndOf="@+id/ivCover"
+            app:layout_constraintStart_toStartOf="@+id/ivCover"
+            tools:text="@string/app_name"/>
         
         <ImageView
             android:id="@+id/ivLabelSold"

@@ -22,6 +22,7 @@ data class TimelineItem(
     }
 
     val coverUri: String? get() = origin.photo
+    val name: String get() = origin.name
     val soldOut: Boolean get() = origin.status == TimelineItemStatus.SOLD_OUT
     val likesCount: Int get() = origin.num_likes
     val commentsCount: Int get() = origin.num_comments

@@ -1,4 +1,6 @@
 # 2019-08-02
+* 5 minutes
+    * Implement name label for the item of timeline list
 * 10 minutes
     * Implement unit tests for api models
 * 30 minutes
