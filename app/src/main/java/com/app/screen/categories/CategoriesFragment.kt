@@ -1,63 +1,84 @@
-package com.app.screen.category
+package com.app.screen.categories
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
-import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.app.R
 import com.app.a.BaseFragment
 import com.app.a.attempt
+import com.app.a.bindView
 import com.app.a.lazyView
 import com.app.a.observe
 import com.app.a.whenDebug
 import com.app.a.withViewModel
-import com.app.screen.timeline.TimelineFragment
-import com.app.ui.BindingView
+import com.app.databinding.FragmentCategoriesBinding
 import com.app.ui.expectation.CategoryTab
+import com.app.utility.InternetAvailableLiveData
 
 /** Class that describes view for timeline list */
-class CategoryFragment : BaseFragment<CategoryVM>(), OnClickListener {
+class CategoriesFragment : BaseFragment<CategoriesVM>(), OnClickListener {
 
     companion object {
 
         private const val EXTRA_CURRENT_ITEM_INDEX = "EXTRA_CURRENT_ITEM_INDEX"
 
-        fun newInstance() = CategoryFragment()
+        fun newInstance() = CategoriesFragment()
     }
 
     private val viewPager by lazyView<ViewPager>(R.id.viewPager)
-    private val progressBar by lazyView<View>(R.id.progressBar)
+    private lateinit var miNoInternet: MenuItem
 
-    private val adapter by lazy { CategoryPagerAdapter(childFragmentManager) }
+    private val adapter by lazy { CategoriesPagerAdapter(childFragmentManager) }
 
-    private var currentItem = -1
+    private var currentItem = 0
 
     override fun onCreate(b: Bundle?) {
         super.onCreate(b)
+        super.setHasOptionsMenu(true)
 
         if (b != null)
             currentItem = b.getInt(EXTRA_CURRENT_ITEM_INDEX)
 
-        withViewModel({ CategoryVM() }) {
+        withViewModel({ CategoriesVM() }) {
             observe(tabs, ::onTabsUpdate)
-            observe(showProgress, ::onShowProgress)
+
+            InternetAvailableLiveData.observe(context!!, this@CategoriesFragment) { available ->
+                if (available == true && adapter.count == 0)
+                    vm.reloadTabs()
+
+                if (::miNoInternet.isInitialized)
+                    miNoInternet.isVisible = available != true
+            }
         }
     }
 
     override fun onCreateView(i: LayoutInflater, parent: ViewGroup?, b: Bundle?): View? =
-        i.inflate(R.layout.fragment_category, parent, false)
+        bindView<FragmentCategoriesBinding>(i, parent) {
+            it.adapter = adapter
+            it.isRefreshing = vm.showProgress
+            it.floatingActionClickListener = this
+        }
 
-    override fun onViewCreated(v: View, b: Bundle?) {
-        super.onViewCreated(v, b)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.fragment_categories, menu)
 
-        v.findViewById<View>(R.id.btnSell).setOnClickListener(this)
-        viewPager.adapter = adapter
+        miNoInternet = menu.findItem(R.id.itemNoInternet)
+        miNoInternet.isVisible = !InternetAvailableLiveData.isAvailable
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.itemNoInternet && adapter.count == 0) {
+            vm.reloadTabs()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroyView() {
@@ -75,21 +96,13 @@ class CategoryFragment : BaseFragment<CategoryVM>(), OnClickListener {
     }
 
     private fun onTabsUpdate(list: List<CategoryTab>?) {
-        val tabs = list ?: emptyList()
-        adapter.bind(tabs)
+        adapter.bind(list ?: emptyList())
         val count = adapter.count
 
         if (count > 0) {
-            if (currentItem == -1)
-                currentItem = count / 2
-
             viewPager.offscreenPageLimit = count
             viewPager.currentItem = currentItem
         }
-    }
-
-    private fun onShowProgress(show: Boolean?) {
-        progressBar.isVisible = show == true
     }
 
     override fun onClick(v: View) {
@@ -103,28 +116,4 @@ class CategoryFragment : BaseFragment<CategoryVM>(), OnClickListener {
             start(newInstance())
         }
     }
-}
-
-/** Required class to help show tabs content with [ViewPager] */
-private class CategoryPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT),
-    BindingView<List<CategoryTab>> {
-
-    private val tabs = mutableListOf<CategoryTab>()
-
-    override fun bind(data: List<CategoryTab>) {
-        tabs.clear()
-        tabs.addAll(data)
-
-        notifyDataSetChanged()
-    }
-
-    fun getCurrentTab(position: Int) = tabs[position]
-
-    override fun getCount() = tabs.size
-
-    override fun getItem(position: Int): Fragment =
-        TimelineFragment.newInstance(tabs[position].origin)
-
-    override fun getPageTitle(position: Int): CharSequence? =
-        tabs[position].title
 }

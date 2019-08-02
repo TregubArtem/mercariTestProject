@@ -28,7 +28,7 @@ class TimelineVM(
     private val itemsImpl = MutableLiveData<List<TimelineItem>>()
     val items: LiveData<List<TimelineItem>> get() = itemsImpl
 
-    private suspend fun retrieveItems() {
+    private fun retrieveItems() = execute {
         whenDebug {
             TimeUnit.SECONDS.delay(1)
         }
@@ -38,12 +38,10 @@ class TimelineVM(
     @Suppress("unused")
     @OnLifecycleEvent(Event.ON_CREATE)
     private fun retrieveItemsInitially() {
-        if (itemsImpl.value == null) execute {
+        if (itemsImpl.value == null)
             retrieveItems()
-        }
     }
 
-    fun reloadItems() = execute {
+    fun reloadItems() =
         retrieveItems()
-    }
 }

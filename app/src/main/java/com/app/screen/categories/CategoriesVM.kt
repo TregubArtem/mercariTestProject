@@ -1,4 +1,4 @@
-package com.app.screen.category
+package com.app.screen.categories
 
 import androidx.lifecycle.Lifecycle.Event
 import androidx.lifecycle.LiveData
@@ -18,16 +18,16 @@ import java.util.concurrent.TimeUnit
  *
  * @param repository source of data for categories
  */
-class CategoryVM(
+class CategoriesVM(
     private val repository: CategoriesRepository = CategoriesRepositoryImpl()
-                ) : BaseVM() {
+                  ) : BaseVM() {
 
     private val tabsImpl = MutableLiveData<List<CategoryTab>>()
     val tabs: LiveData<List<CategoryTab>> get() = tabsImpl
 
     @Suppress("unused")
     @OnLifecycleEvent(Event.ON_CREATE)
-    private fun retrieveTabs() {
+    private fun retrieveTabsInitially() {
         if (tabsImpl.value == null) execute {
             whenDebug {
                 TimeUnit.SECONDS.delay(1)
@@ -35,4 +35,7 @@ class CategoryVM(
             tabsImpl %= repository.getCategories().map { CategoryTab(it) }
         }
     }
+
+    fun reloadTabs() =
+        retrieveTabsInitially()
 }

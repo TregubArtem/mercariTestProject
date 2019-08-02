@@ -14,4 +14,5 @@
     <string name="error_timeout">Request timeout error. Please try again later.</string>
     <string name="error_forbidden">Access to the resource temporarily is forbidden</string>
     <string name="error_unknown_host">Server temporary unavailable. Please try again later.</string>
+    <string name="error_no_internet">No internet</string>
 </resources>

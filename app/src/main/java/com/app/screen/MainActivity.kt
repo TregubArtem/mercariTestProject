@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.widget.FrameLayout
 import com.app.R
 import com.app.a.BaseActivity
-import com.app.screen.category.CategoryFragment
+import com.app.screen.categories.CategoriesFragment
 
 /** Root container of all screens */
 class MainActivity : BaseActivity() {
@@ -20,6 +20,6 @@ class MainActivity : BaseActivity() {
         setContentView(layout)
 
         if (b == null)
-            start(CategoryFragment.newInstance())
+            start(CategoriesFragment.newInstance())
     }
 }

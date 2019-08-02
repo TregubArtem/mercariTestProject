@@ -1,4 +1,7 @@
 # 2019-08-02
+* 1 hours
+    * Implement singleton to handle states of internet connection
+    * Start implement binding for categories screen
 * 30 minutes
     * Complete wrapping of timeline screen with view binding
     * Fix few crashes related to screen state change
