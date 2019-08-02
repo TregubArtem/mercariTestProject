@@ -1,4 +1,6 @@
 # 2019-08-02
+* 30 minutes
+    * Improve logic for categories screen respective to current tab selection
 * 1 hours
     * Implement singleton to handle states of internet connection
     * Start implement binding for categories screen

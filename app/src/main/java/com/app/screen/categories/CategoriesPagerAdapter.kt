@@ -14,13 +14,14 @@ import com.app.ui.expectation.CategoryTab
  * @param fm manager to handle attachment of content fragments
  */
 class CategoriesPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT),
-    BindingView<List<CategoryTab>> {
+    BindingView<List<CategoryTab>?> {
 
     private val tabs = mutableListOf<CategoryTab>()
 
-    override fun bind(data: List<CategoryTab>) {
+    override fun bind(data: List<CategoryTab>?) {
         tabs.clear()
-        tabs.addAll(data)
+        if (data != null)
+            tabs.addAll(data)
 
         notifyDataSetChanged()
     }

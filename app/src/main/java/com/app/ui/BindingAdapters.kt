@@ -4,6 +4,8 @@ import android.graphics.Color
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 
 /**
  * Method for view binding that allow to setup colors
@@ -37,4 +39,32 @@ fun onSwipeRefreshLayoutSetOnRefreshListener(v: SwipeRefreshLayout, listener: On
 @BindingAdapter("isRefreshing")
 fun onSwipeRefreshLayoutSetRefreshing(v: SwipeRefreshLayout, isRefreshing: Boolean?) {
     v.isRefreshing = isRefreshing == true
+}
+
+/**
+ * Stripped down version of [OnPageChangeListener]
+ * Used only for binding adapters purposes
+ */
+interface OnPageSelectedListener {
+    /** Same as [OnPageChangeListener.onPageSelected] */
+    fun onPageSelected(position: Int)
+}
+
+/**
+ * Method for view binding that allow to listen position of current tab
+ *
+ * @param v target view
+ * @param listener actual observer of event
+ */
+@BindingAdapter("pageSelectedListener")
+fun onViewPagerSetPageSelectedListener(v: ViewPager, listener: OnPageSelectedListener?) {
+    listener ?: return
+
+    val changeListener = object : OnPageChangeListener {
+        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) = Unit
+        override fun onPageScrollStateChanged(state: Int) = Unit
+        override fun onPageSelected(position: Int) =
+            listener.onPageSelected(position)
+    }
+    v.addOnPageChangeListener(changeListener)
 }

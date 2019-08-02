@@ -13,6 +13,7 @@ import android.net.NetworkInfo
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import androidx.core.content.getSystemService
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -29,14 +30,10 @@ object InternetAvailableLiveData : LiveData<Boolean>() {
 
     val isAvailable: Boolean get() = value == true
 
-    @Suppress("MemberVisibilityCanBePrivate")
     fun observe(ctx: Context, owner: LifecycleOwner, observer: Observer<in Boolean>) {
         registerReceiver(ctx.applicationContext)
         super.observe(owner, observer)
     }
-
-    fun observe(ctx: Context, owner: LifecycleOwner, block: (result: Boolean?) -> Unit) =
-        observe(ctx, owner, Observer(block))
 
     override fun observe(owner: LifecycleOwner, observer: Observer<in Boolean>) =
         throw NoSuchMethodError("Use method with Context instead")
@@ -83,4 +80,9 @@ object InternetAvailableLiveData : LiveData<Boolean>() {
             onAvailable(info?.isConnected == true)
         }
     }
+}
+
+fun Fragment.observeInternetAvailability(block: (available: Boolean?) -> Unit) {
+    val ctx = context ?: return
+    InternetAvailableLiveData.observe(ctx, this, Observer(block))
 }

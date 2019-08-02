@@ -17,6 +17,10 @@
             type="androidx.viewpager.widget.PagerAdapter"/>
         
         <variable
+            name="pageSelectedListener"
+            type="com.app.ui.OnPageSelectedListener"/>
+        
+        <variable
             name="floatingActionClickListener"
             type="android.view.View.OnClickListener"/>
     </data>
@@ -34,7 +38,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:pageSelectedListener="@{pageSelectedListener}">
             
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/layoutTabs"
