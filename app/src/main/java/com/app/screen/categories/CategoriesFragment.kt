@@ -42,6 +42,8 @@ class CategoriesFragment : BaseFragment<CategoriesVM>(), OnClickListener, OnPage
             pagePosition = b.getInt(EXTRA_CURRENT_PAGE_POSITION)
 
         withViewModel({ CategoriesVM() }) {
+            // observeForever is only because adapter could know about updates all the time and have it before ViewPager is created,
+            // so effectively restore last position of the tab after rotation
             tabs.observeForever(adapter::bind)
         }
         observeInternetAvailability(::onInternetAvailabilityChange)

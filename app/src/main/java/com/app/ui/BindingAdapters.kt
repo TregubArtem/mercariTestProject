@@ -1,11 +1,13 @@
 package com.app.ui
 
 import android.graphics.Color
+import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
+import com.squareup.picasso.Picasso
 
 /**
  * Method for view binding that allow to setup colors
@@ -67,4 +69,15 @@ fun onViewPagerSetPageSelectedListener(v: ViewPager, listener: OnPageSelectedLis
             listener.onPageSelected(position)
     }
     v.addOnPageChangeListener(changeListener)
+}
+
+/**
+ * Loads image with [Picasso] into target view
+ *
+ * @param v target view
+ * @param uri path on image
+ */
+@BindingAdapter("imageUri")
+fun onImageViewSetImageUri(v: ImageView, uri: String?) {
+    Picasso.get().load(uri).into(v)
 }

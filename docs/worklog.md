@@ -1,4 +1,7 @@
 # 2019-08-02
+* 1 hour
+    * Complete wrapping of timeline items with view binding
+    * Implement base binding adapter
 * 30 minutes
     * Improve logic for categories screen respective to current tab selection
 * 1 hours

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.app.a.BaseFragment
 import com.app.a.bindView
-import com.app.a.observe
+import com.app.a.toLog
 import com.app.a.withArguments
 import com.app.a.withViewModel
 import com.app.api.model.CategoryModel
@@ -26,7 +26,7 @@ class TimelineFragment : BaseFragment<TimelineVM>() {
         }
     }
 
-    private val adapter by lazy { TimelineAdapter() }
+    private val adapter by lazy { TimelineBindingAdapter(::onTimelineItemClick) }
 
     override fun onCreate(b: Bundle?) {
         super.onCreate(b)
@@ -35,7 +35,8 @@ class TimelineFragment : BaseFragment<TimelineVM>() {
         val category = (b ?: arguments)?.getParcelable<CategoryModel>(EXTRA_CATEGORY) as CategoryModel
 
         withViewModel({ TimelineVM(category) }) {
-            observe(items, ::onItemsUpdate)
+            // observeForever used because of adapter already able to deliver data in fine moment
+            items.observeForever(adapter::submitList)
         }
     }
 
@@ -53,7 +54,7 @@ class TimelineFragment : BaseFragment<TimelineVM>() {
         b.putParcelable(EXTRA_CATEGORY, vm.category)
     }
 
-    private fun onItemsUpdate(list: List<TimelineItem>?) {
-        adapter.submitList(list)
+    private fun onTimelineItemClick(item: TimelineItem) {
+        toLog(item)
     }
 }

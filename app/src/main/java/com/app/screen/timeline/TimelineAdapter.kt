@@ -1,21 +1,45 @@
 package com.app.screen.timeline
 
-import android.view.ViewGroup
+import android.content.res.Resources
+import android.view.View
+import android.view.View.OnClickListener
+import android.view.ViewGroup.LayoutParams
+import android.view.ViewGroup.MarginLayoutParams
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.app.R
+import com.app.a.BaseBindingAdapter
+import com.app.a.classAction
+import com.app.databinding.ViewTimelineItemBinding
 import com.app.ui.expectation.TimelineItem
-import com.app.view.item.TimelineItemView
-import com.app.view.item.TimelineItemViewHolder
 
-/** Class to help [RecyclerView] to show views. Exactly that is showing items for timeline list of some category. */
-class TimelineAdapter : ListAdapter<TimelineItem, TimelineItemViewHolder>(TimelineDiffCallback()) {
+/**
+ * Class to help [RecyclerView] to show views
+ * Exactly that class responsible for showing items of timeline
+ */
+class TimelineBindingAdapter(
+    private val onItemClick: (TimelineItem) -> Unit
+                            ) : BaseBindingAdapter<TimelineItem>(TimelineDiffCallback()), OnClickListener {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimelineItemViewHolder =
-        TimelineItemView(parent.context).createViewHolder()
+    override val classAction = classAction<ViewTimelineItemBinding, TimelineItem> { item, _ ->
+        this.item = item
+        clickListener = this@TimelineBindingAdapter
+    }
 
-    override fun onBindViewHolder(holder: TimelineItemViewHolder, position: Int) =
-        holder.bind(getItem(position))
+    override fun setLayoutParams(target: View, resources: Resources) {
+        val margin = resources.getDimensionPixelSize(R.dimen.spacing_d2)
+
+        val params = MarginLayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+        params.setMargins(margin, margin, margin, margin)
+
+        target.layoutParams = params
+    }
+
+    override fun onClick(v: View) {
+        val tag = v.tag as TimelineItem
+        onItemClick(tag)
+    }
 }
 
 /** Required class to use with [ListAdapter] */
