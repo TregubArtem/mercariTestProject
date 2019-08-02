@@ -9,14 +9,15 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import com.app.R
+import com.app.databinding.FragmentCategoriesBinding
 import com.app.global.BaseFragment
 import com.app.global.bindView
 import com.app.global.whenDebug
 import com.app.global.withViewModel
-import com.app.databinding.FragmentCategoriesBinding
 import com.app.ui.OnPageSelectedListener
+import com.app.utility.Analytics
 import com.app.utility.InternetAvailableLiveData
-import com.app.utility.observeInternetAvailability
+import com.app.utility.observeInternetStatus
 
 /** Class that describes view for timeline list */
 class CategoriesFragment : BaseFragment<CategoriesVM>(), OnClickListener, OnPageSelectedListener {
@@ -38,7 +39,9 @@ class CategoriesFragment : BaseFragment<CategoriesVM>(), OnClickListener, OnPage
         super.onCreate(b)
         super.setHasOptionsMenu(true)
 
-        if (b != null)
+        if (b == null)
+            Analytics.startOf(this)
+        else
             pagePosition = b.getInt(EXTRA_CURRENT_PAGE_POSITION)
 
         withViewModel({ CategoriesVM() }) {
@@ -46,7 +49,7 @@ class CategoriesFragment : BaseFragment<CategoriesVM>(), OnClickListener, OnPage
             // so effectively restore last position of the tab after rotation
             tabs.observeForever(adapter::bind)
         }
-        observeInternetAvailability(::onInternetAvailabilityChange)
+        observeInternetStatus(::onInternetStatusChange)
     }
 
     override fun onCreateView(i: LayoutInflater, parent: ViewGroup?, b: Bundle?): View? =
@@ -80,6 +83,8 @@ class CategoriesFragment : BaseFragment<CategoriesVM>(), OnClickListener, OnPage
     }
 
     override fun onClick(v: View) {
+        Analytics.clickOn("actionButton")
+
         val position = pagePosition
         if (position < adapter.count) {
             val tab = adapter.getCurrentTab(position)
@@ -95,11 +100,15 @@ class CategoriesFragment : BaseFragment<CategoriesVM>(), OnClickListener, OnPage
         pagePosition = position
     }
 
-    private fun onInternetAvailabilityChange(available: Boolean?) {
+    private fun onInternetStatusChange(available: Boolean?) {
+        Analytics.internetAccessChange(available == true)
+
         if (available == true && adapter.count == 0)
             vm.reloadTabs()
 
         if (::miNoInternet.isInitialized)
             miNoInternet.isVisible = available != true
     }
+
+    override fun toString(): String = "categories"
 }

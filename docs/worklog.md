@@ -1,4 +1,6 @@
 # 2019-08-02
+* 30 minutes
+    * Implement analytics for limited places
 * 15 minutes
     * Add Japanese locale
     * Change location of some classes

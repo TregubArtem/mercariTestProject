@@ -1,6 +1,7 @@
 package com.app
 
 import android.app.Application
+import com.app.utility.Analytics
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.answers.Answers
 import io.fabric.sdk.android.Fabric
@@ -13,5 +14,7 @@ class App : Application() {
         super.onCreate()
 
         Fabric.with(this, Crashlytics(), Answers())
+
+        Analytics.startOf(this)
     }
 }

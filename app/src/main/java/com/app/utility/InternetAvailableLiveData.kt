@@ -57,6 +57,12 @@ object InternetAvailableLiveData : LiveData<Boolean>() {
         }
     }
 
+    override fun postValue(value: Boolean?) {
+        // to prevent fake calls with duplications
+        if (this.value != value)
+            super.postValue(value)
+    }
+
     private class Callback(
         private val onAvailable: (Boolean) -> Unit
                           ) : NetworkCallback() {
@@ -82,7 +88,12 @@ object InternetAvailableLiveData : LiveData<Boolean>() {
     }
 }
 
-fun Fragment.observeInternetAvailability(block: (available: Boolean?) -> Unit) {
+/**
+ * Simple way to subscribe on Internet status changes
+ *
+ * @param block lambda that will be called when something be changed
+ */
+fun Fragment.observeInternetStatus(block: (available: Boolean?) -> Unit) {
     val ctx = context ?: return
     InternetAvailableLiveData.observe(ctx, this, Observer(block))
 }

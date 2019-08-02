@@ -5,14 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
+import com.app.api.model.CategoryModel
+import com.app.databinding.FragmentTimelineBinding
 import com.app.global.BaseFragment
 import com.app.global.bindView
 import com.app.global.toLog
 import com.app.global.withArguments
 import com.app.global.withViewModel
-import com.app.api.model.CategoryModel
-import com.app.databinding.FragmentTimelineBinding
 import com.app.ui.expectation.TimelineItem
+import com.app.utility.Analytics
 
 /** Class that describes view for timeline list */
 class TimelineFragment : BaseFragment<TimelineVM>() {
@@ -38,6 +39,8 @@ class TimelineFragment : BaseFragment<TimelineVM>() {
             // observeForever used because of adapter already able to deliver data in fine moment
             items.observeForever(adapter::submitList)
         }
+        if (b == null)
+            Analytics.startOf(this)
     }
 
     override fun onCreateView(i: LayoutInflater, parent: ViewGroup?, b: Bundle?): View? =
@@ -55,6 +58,9 @@ class TimelineFragment : BaseFragment<TimelineVM>() {
     }
 
     private fun onTimelineItemClick(item: TimelineItem) {
+        Analytics.clickOn("timelineItem")
         toLog(item)
     }
+
+    override fun toString(): String = vm.category.name
 }
