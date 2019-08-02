@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import com.app.a.BaseFragment
-import com.app.a.bindView
-import com.app.a.toLog
-import com.app.a.withArguments
-import com.app.a.withViewModel
+import com.app.global.BaseFragment
+import com.app.global.bindView
+import com.app.global.toLog
+import com.app.global.withArguments
+import com.app.global.withViewModel
 import com.app.api.model.CategoryModel
 import com.app.databinding.FragmentTimelineBinding
 import com.app.ui.expectation.TimelineItem

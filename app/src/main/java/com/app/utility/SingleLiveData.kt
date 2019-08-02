@@ -6,7 +6,7 @@ import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.app.a.toLog
+import com.app.global.toLog
 import java.util.concurrent.atomic.AtomicBoolean
 
 /**

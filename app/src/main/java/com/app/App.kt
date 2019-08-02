@@ -1,4 +1,4 @@
-package com.app.a
+package com.app
 
 import android.app.Application
 import com.crashlytics.android.Crashlytics

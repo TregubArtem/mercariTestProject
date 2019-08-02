@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="timeline_sell">売る</string>
+    
+    <string name="content_item_image">アイテムの画像</string>
+    <string name="content_comment_counter">アイテムへのコメント数</string>
+    <string name="content_likes_counter">アイテムへのいいねの数</string>
+    <string name="content_item_sold">アイテムがすでに販売されていることを示すラベル</string>
+    
+    <string name="error_unknown">未知のエラー</string>
+    <string name="error_forbidden">リソースへのアクセスは一時的に禁止されています</string>
+    <string name="error_timeout">要求タイムアウトエラー。後でもう一度やり直してください。</string>
+    <string name="error_unknown_host">サーバーは一時的に利用できません。後でもう一度やり直してください。</string>
+</resources>

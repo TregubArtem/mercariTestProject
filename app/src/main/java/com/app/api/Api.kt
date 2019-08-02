@@ -1,6 +1,6 @@
 package com.app.api
 
-import com.app.a.whenDebug
+import com.app.global.whenDebug
 import com.app.api.model.CategoryModel
 import com.app.api.model.TimelineItemModel
 import okhttp3.OkHttpClient

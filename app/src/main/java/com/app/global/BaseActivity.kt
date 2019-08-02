@@ -1,4 +1,4 @@
-package com.app.a
+package com.app.global
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment

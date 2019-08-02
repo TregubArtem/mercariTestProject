@@ -4,10 +4,10 @@ import androidx.lifecycle.Lifecycle.Event
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.OnLifecycleEvent
-import com.app.a.BaseVM
-import com.app.a.delay
-import com.app.a.remAssign
-import com.app.a.whenDebug
+import com.app.global.BaseVM
+import com.app.global.delay
+import com.app.global.remAssign
+import com.app.global.whenDebug
 import com.app.repository.CategoriesRepository
 import com.app.repository.CategoriesRepositoryImpl
 import com.app.ui.expectation.CategoryTab

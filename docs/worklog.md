@@ -1,4 +1,7 @@
 # 2019-08-02
+* 15 minutes
+    * Add Japanese locale
+    * Change location of some classes
 * 1 hour
     * Complete wrapping of timeline items with view binding
     * Implement base binding adapter

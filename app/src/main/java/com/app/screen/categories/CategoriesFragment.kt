@@ -9,10 +9,10 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import com.app.R
-import com.app.a.BaseFragment
-import com.app.a.bindView
-import com.app.a.whenDebug
-import com.app.a.withViewModel
+import com.app.global.BaseFragment
+import com.app.global.bindView
+import com.app.global.whenDebug
+import com.app.global.withViewModel
 import com.app.databinding.FragmentCategoriesBinding
 import com.app.ui.OnPageSelectedListener
 import com.app.utility.InternetAvailableLiveData

@@ -1,18 +1,19 @@
 <resources>
-    <string name="app_name">Mercari</string>
+    <string name="app_name" translatable="false">Mercari</string>
+    
+    <string name="timeline_default_value" translatable="false">0</string>
+    <string name="timeline_price_format" translatable="false">$ %1$s</string>
     
     <string name="timeline_sell">Sell</string>
-    <string name="timeline_default_value">0</string>
-    <string name="timeline_price_format">$ %1$s</string>
     
-    <string name="content_item_image">Image of selling item</string>
-    <string name="content_item_sold">Label that the item is already sold</string>
+    <string name="content_item_image">Image of the item</string>
     <string name="content_likes_counter">Item\'s likes indicator</string>
-    <string name="content_comment_counter">Item\'s comments count</string>
+    <string name="content_item_sold">Label that the item is already sold</string>
+    <string name="content_comment_counter">The number of comments to the item</string>
     
     <string name="error_unknown">Unknown error</string>
+    <string name="error_no_internet" translatable="false">No Internet</string>
     <string name="error_timeout">Request timeout error. Please try again later.</string>
-    <string name="error_forbidden">Access to the resource temporarily is forbidden</string>
-    <string name="error_unknown_host">Server temporary unavailable. Please try again later.</string>
-    <string name="error_no_internet">No internet</string>
+    <string name="error_forbidden">Access to the resource is temporarily forbidden</string>
+    <string name="error_unknown_host">Server temporarily unavailable. Please try again later.</string>
 </resources>

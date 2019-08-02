@@ -1,6 +1,6 @@
 @file:Suppress("RedundantOverride")
 
-package com.app.a
+package com.app.global
 
 import android.os.Bundle
 import android.view.LayoutInflater

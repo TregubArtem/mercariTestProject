@@ -1,4 +1,4 @@
-package com.app.a
+package com.app.global
 
 import android.content.res.Resources
 import android.view.LayoutInflater

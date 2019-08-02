@@ -1,6 +1,6 @@
 @file:Suppress("MemberVisibilityCanBePrivate")
 
-package com.app.a
+package com.app.global
 
 import androidx.annotation.CallSuper
 import androidx.lifecycle.LifecycleObserver

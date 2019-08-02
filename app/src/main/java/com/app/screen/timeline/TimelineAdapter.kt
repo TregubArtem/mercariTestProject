@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.R
-import com.app.a.BaseBindingAdapter
-import com.app.a.classAction
+import com.app.global.BaseBindingAdapter
+import com.app.global.classAction
 import com.app.databinding.ViewTimelineItemBinding
 import com.app.ui.expectation.TimelineItem
 

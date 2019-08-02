@@ -1,4 +1,4 @@
-package com.app.a
+package com.app.global
 
 import android.content.Context
 import androidx.annotation.IdRes

@@ -3,7 +3,7 @@ package com.app.screen
 import android.os.Bundle
 import android.widget.FrameLayout
 import com.app.R
-import com.app.a.BaseActivity
+import com.app.global.BaseActivity
 import com.app.screen.categories.CategoriesFragment
 
 /** Root container of all screens */

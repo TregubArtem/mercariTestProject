@@ -1,8 +1,8 @@
 package com.app.api
 
 import com.app.R
-import com.app.a.AnyError
-import com.app.a.any
+import com.app.global.AnyError
+import com.app.global.any
 import retrofit2.HttpException
 
 /**
