@@ -38,6 +38,8 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@android:drawable/ic_menu_gallery"/>
         
+        <!--TODO: show name of item-->
+        
         <ImageView
             android:id="@+id/ivLabelSold"
             android:layout_width="0dp"

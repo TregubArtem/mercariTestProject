@@ -1,4 +1,6 @@
 # 2019-08-02
+* 10 minutes
+    * Implement unit tests for api models
 * 30 minutes
     * Implement analytics for limited places
 * 15 minutes
