@@ -1,4 +1,6 @@
 # 2019-08-02
+* 10 minutes
+    * Implement unit tests for ui expectations
 * 5 minutes
     * Implement name label for the item of timeline list
 * 10 minutes

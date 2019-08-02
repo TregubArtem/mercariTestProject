@@ -5,6 +5,7 @@ import com.app.api.model.TimelineItemModel
 import com.app.api.model.TimelineItemStatus
 import com.app.ui.UIExpectation
 import kotlinx.android.parcel.Parcelize
+import org.jetbrains.annotations.TestOnly
 import java.text.DecimalFormat
 
 /**
@@ -18,7 +19,11 @@ data class TimelineItem(
                        ) : UIExpectation<TimelineItemModel>, Parcelable {
 
     companion object {
+
         private val numberFormat = DecimalFormat("#,###,###,###")
+
+        @TestOnly
+        fun formatPrice(priceUsd: Float) = numberFormat.format(priceUsd)
     }
 
     val coverUri: String? get() = origin.photo
