@@ -1,4 +1,9 @@
 # 2019-08-03
+* 30 minutes
+    * Create and setup beta release
+    * Upload minimum required graphics
+    * Setup and fill all required forms 
+    * Create new application at Google Play
 * 15 minutes
     * Fix problem on release build related to obfuscation
     * Add description to distribution notes
