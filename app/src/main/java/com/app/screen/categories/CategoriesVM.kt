@@ -11,6 +11,7 @@ import com.app.global.whenDebug
 import com.app.repository.CategoriesRepository
 import com.app.repository.CategoriesRepositoryImpl
 import com.app.ui.expectation.CategoryTab
+import org.jetbrains.annotations.TestOnly
 import java.util.concurrent.TimeUnit
 
 /**
@@ -25,9 +26,10 @@ class CategoriesVM(
     private val tabsImpl = MutableLiveData<List<CategoryTab>>()
     val tabs: LiveData<List<CategoryTab>> get() = tabsImpl
 
+    @TestOnly
     @Suppress("unused")
     @OnLifecycleEvent(Event.ON_CREATE)
-    private fun retrieveTabsInitially() {
+    fun retrieveTabsInitially() {
         if (tabsImpl.value == null) execute {
             whenDebug {
                 TimeUnit.SECONDS.delay(1)

@@ -6,6 +6,8 @@ buildscript {
         vOkhttp = "4.0.1"
         vKotlin = "1.3.41"
         vRetrofit = "2.6.0"
+        vTestCore = "1.2.0"
+        vCoroutines = "1.2.1"
 
         def keystorePropertiesFile = rootProject.file("keystore.properties")
         keystoreProperties = new Properties()

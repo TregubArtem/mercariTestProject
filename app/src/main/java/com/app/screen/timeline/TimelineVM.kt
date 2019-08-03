@@ -4,14 +4,15 @@ import androidx.lifecycle.Lifecycle.Event
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.OnLifecycleEvent
+import com.app.api.model.CategoryModel
 import com.app.global.BaseVM
 import com.app.global.delay
 import com.app.global.remAssign
 import com.app.global.whenDebug
-import com.app.api.model.CategoryModel
 import com.app.repository.TimelineRepository
 import com.app.repository.TimelineRepositoryImpl
 import com.app.ui.expectation.TimelineItem
+import org.jetbrains.annotations.TestOnly
 import java.util.concurrent.TimeUnit
 
 /**
@@ -22,7 +23,7 @@ import java.util.concurrent.TimeUnit
  */
 class TimelineVM(
     val category: CategoryModel,
-    val repository: TimelineRepository = TimelineRepositoryImpl()
+    private val repository: TimelineRepository = TimelineRepositoryImpl()
                 ) : BaseVM() {
 
     private val itemsImpl = MutableLiveData<List<TimelineItem>>()
@@ -35,9 +36,10 @@ class TimelineVM(
         itemsImpl %= repository.getItems(category).map { TimelineItem(it) }
     }
 
+    @TestOnly
     @Suppress("unused")
     @OnLifecycleEvent(Event.ON_CREATE)
-    private fun retrieveItemsInitially() {
+    fun retrieveItemsInitially() {
         if (itemsImpl.value == null)
             retrieveItems()
     }

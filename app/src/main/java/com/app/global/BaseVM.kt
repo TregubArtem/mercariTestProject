@@ -2,20 +2,16 @@
 
 package com.app.global
 
-import androidx.annotation.CallSuper
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.app.R
 import com.app.api.toAnyErrors
 import com.app.utility.SingleLiveData
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.net.SocketTimeoutException
@@ -24,8 +20,6 @@ import java.net.UnknownHostException
 /** Base inheritance for any ViewModel class of that project */
 abstract class BaseVM : ViewModel(), LifecycleObserver {
 
-    private val superJob = SupervisorJob()
-    private val scope by lazy { CoroutineScope(Dispatchers.IO + superJob) }
     private val exceptionHandler = CoroutineExceptionHandler { _, e -> onExecuteException(e) }
 
     private val showProgressImpl = MutableLiveData<Boolean>()
@@ -41,7 +35,7 @@ abstract class BaseVM : ViewModel(), LifecycleObserver {
      * @param block anything that should be called with suspend
      */
     protected fun execute(showProgress: Boolean = true, block: suspend () -> Unit) {
-        scope.launch(exceptionHandler) {
+        viewModelScope.launch(exceptionHandler) {
             if (showProgress)
                 showProgressImpl %= true
 
@@ -81,11 +75,5 @@ abstract class BaseVM : ViewModel(), LifecycleObserver {
      */
     protected fun postError(error: AnyError) {
         errorMessageImpl %= error
-    }
-
-    @CallSuper
-    override fun onCleared() {
-        super.onCleared()
-        superJob.cancelChildren()
     }
 }

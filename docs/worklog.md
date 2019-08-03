@@ -1,4 +1,7 @@
 # 2019-08-03
+* 1.5 hours
+    * Implement unit tests for categories and timeline view models
+    * Replace own implementation of coroutine scope to viewModelScope
 * 2 hours
     * Implement instrumental tests for categories and timeline screens
 
