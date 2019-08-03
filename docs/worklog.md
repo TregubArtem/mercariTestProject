@@ -1,5 +1,8 @@
 # 2019-08-03
 * 15 minutes
+    * Fix problem on release build related to obfuscation
+    * Add description to distribution notes
+* 15 minutes
     * Improvements to tests respective to new flavors
     * Improvements respective to release build report
 * 1 hour

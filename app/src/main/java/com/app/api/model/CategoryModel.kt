@@ -1,6 +1,7 @@
 package com.app.api.model
 
 import android.os.Parcelable
+import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 /**
@@ -11,6 +12,8 @@ import kotlinx.android.parcel.Parcelize
  */
 @Parcelize
 data class CategoryModel(
+    @field:Json(name = "name")
     val name: String,
+    @field:Json(name = "data")
     val data: String
                         ) : Parcelable

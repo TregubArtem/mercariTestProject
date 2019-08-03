@@ -2,6 +2,7 @@ package com.app.api.model
 
 import android.os.Parcelable
 import androidx.annotation.StringDef
+import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 /** Describes all possible variants for statuses of timeline item */
@@ -30,13 +31,19 @@ annotation class TimelineItemStatus {
  */
 @Parcelize
 data class TimelineItemModel(
+    @field:Json(name = "id")
     val id: String,
+    @field:Json(name = "name")
     val name: String,
+    @field:Json(name = "photo")
     val photo: String?,
     @TimelineItemStatus
+    @field:Json(name = "status")
     val status: String,
-
+    @field:Json(name = "price")
     val price: Float,
+    @field:Json(name = "num_likes")
     val num_likes: Int,
+    @field:Json(name = "num_comments")
     val num_comments: Int
                             ) : Parcelable
