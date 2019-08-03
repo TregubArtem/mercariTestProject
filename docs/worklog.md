@@ -1,4 +1,6 @@
 # 2019-08-03
+* 5 minutes
+    * Merge own and task repositories
 * 30 minutes
     * Describe readme.md
     * Change name of application and increment version code because of Google Play publish rejection

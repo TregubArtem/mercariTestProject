@@ -14,6 +14,7 @@
 2. [Build notes](app/destribution.notes) - information about what is done and ready to test
 3. Aliases of testers for [Release](app/distribution-release.testers) and [QA](distribution-qa.testers) builds to be shared with
 4. Description about shared test build located in [Notes](app/distribution.notes)
+5. [English](docs/SKILL_TEST.en.md) and [Japanese](SKILL_TEST.ja.md) requirements to the app
 
 ## Minimum features that available in the app
 * On startup access remote api to get data about available categories
