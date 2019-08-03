@@ -21,7 +21,7 @@ class TimelineFragmentTest {
     @Test
     fun launchFragment() {
         val categoryName = "Mock"
-        val category = CategoryModel(categoryName, "")
+        val category = CategoryModel(categoryName, "test.json")
         val arguments = TimelineFragment.newArguments(category)
         val scenario = launchFragmentInContainer(arguments) { TimelineFragment() }
 
@@ -33,7 +33,7 @@ class TimelineFragmentTest {
     @Test
     fun recreateFragment() {
         val categoryName = "Mock"
-        val category = CategoryModel(categoryName, "")
+        val category = CategoryModel(categoryName, "test.json")
         val arguments = TimelineFragment.newArguments(category)
         val scenario = launchFragmentInContainer(arguments) { TimelineFragment() }
 
@@ -44,7 +44,7 @@ class TimelineFragmentTest {
 
     @Test
     fun layoutManageIsGrid() {
-        val category = CategoryModel("Mock", "")
+        val category = CategoryModel("Mock", "test.json")
         val arguments = TimelineFragment.newArguments(category)
         launchFragmentInContainer(arguments) { TimelineFragment() }
 
@@ -58,7 +58,7 @@ class TimelineFragmentTest {
 
     @Test
     fun recyclerViewAdapterIsBinding() {
-        val category = CategoryModel("Mock", "")
+        val category = CategoryModel("Mock", "test.json")
         val arguments = TimelineFragment.newArguments(category)
         launchFragmentInContainer(arguments) { TimelineFragment() }
 

@@ -24,6 +24,7 @@ class MockApiInterceptor : Interceptor {
             uri.endsWith("artem.json")     -> ARTEM_JSON_RESPONSE
             uri.endsWith("android.json")   -> ANDROID_JSON_RESPONSE
             uri.endsWith("developer.json") -> DEVELOPER_JSON_RESPONSE
+            uri.endsWith("test.json")      -> TEST_JSON_RESPONSE
 
             else                           -> throw IllegalStateException("Uri $uri is not supported")
         }
@@ -308,3 +309,5 @@ private const val DEVELOPER_JSON_RESPONSE = """
     "photo": "https://cdn.pixabay.com/photo/2017/09/29/17/13/read-2799818_960_720.jpg"
 }]
 """
+
+private const val TEST_JSON_RESPONSE = "[]"

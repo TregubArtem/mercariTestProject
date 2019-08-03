@@ -1,4 +1,7 @@
 # 2019-08-03
+* 15 minutes
+    * Improvements to tests respective to new flavors
+    * Improvements respective to release build report
 * 1 hour
     * Implement mock api responses
     * Enable flavors for api - mock and prod
