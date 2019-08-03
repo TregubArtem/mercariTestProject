@@ -79,5 +79,6 @@ fun onViewPagerSetPageSelectedListener(v: ViewPager, listener: OnPageSelectedLis
  */
 @BindingAdapter("imageUri")
 fun onImageViewSetImageUri(v: ImageView, uri: String?) {
-    Picasso.get().load(uri).into(v)
+    val path = if (uri.isNullOrBlank()) null else uri
+    Picasso.get().load(path).into(v)
 }

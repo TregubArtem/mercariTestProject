@@ -1,4 +1,7 @@
 # 2019-08-03
+* 1 hour
+    * Implement mock api responses
+    * Enable flavors for api - mock and prod
 * 1.5 hours
     * Implement unit tests for categories and timeline view models
     * Replace own implementation of coroutine scope to viewModelScope

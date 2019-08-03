@@ -7,6 +7,7 @@ apply plugin: "kotlin-android-extensions"
 
 android {
     compileSdkVersion targetSdk
+    flavorDimensions "api"
 
     defaultConfig {
         applicationId "tregub.miniMercariApp"
@@ -58,6 +59,15 @@ android {
 
             ext.betaDistributionReleaseNotesFilePath = "distribution.notes"
             ext.betaDistributionGroupAliasesFilePath = "distribution-qa.testers"
+        }
+    }
+    productFlavors {
+        mock {
+            dimension "api"
+            versionNameSuffix ":mockApi"
+        }
+        prod {
+            dimension "api"
         }
     }
     compileOptions {

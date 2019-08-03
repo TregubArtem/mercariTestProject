@@ -1,8 +1,9 @@
 package com.app.api
 
-import com.app.global.whenDebug
+import com.app.api.mock.MockApiInterceptor
 import com.app.api.model.CategoryModel
 import com.app.api.model.TimelineItemModel
+import com.app.global.whenDebug
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level.BODY
@@ -38,6 +39,8 @@ private val apiImpl: IApi = run {
         interceptor.level = BODY
         client.addInterceptor(interceptor)
     }
+    client.addInterceptor(MockApiInterceptor())
+
     Retrofit.Builder()
         .baseUrl(ApiPath.BASE)
         .addConverterFactory(MoshiConverterFactory.create())
