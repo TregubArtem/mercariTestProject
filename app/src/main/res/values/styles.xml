@@ -1,0 +1,39 @@
+<resources>
+    
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    
+    <style name="Timeline"/>
+    
+    <style name="Timeline.Item"/>
+    
+    <style name="Timeline.Item.Value">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColorHint">@android:color/black</item>
+        <item name="android:paddingBottom">@dimen/spacing_d2</item>
+        <item name="android:paddingStart">@dimen/spacing_d4</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:paddingEnd">@dimen/spacing_d4</item>
+        <item name="android:paddingTop">@dimen/spacing_d4</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lines">1</item>
+        
+        <item name="layout_constraintTop_toBottomOf">@+id/ivCover</item>
+    </style>
+    
+    <style name="Timeline.Item.Icon">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:padding">2dp</item>
+        
+        <item name="layout_constraintBottom_toBottomOf">@+id/tvPrice</item>
+        <item name="layout_constraintTop_toTopOf">@+id/tvPrice</item>
+        <item name="layout_constraintDimensionRatio">1</item>
+    </style>
+</resources>

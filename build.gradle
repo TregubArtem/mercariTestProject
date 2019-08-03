@@ -1,0 +1,36 @@
+buildscript {
+    ext {
+        minSdk = 21
+        targetSdk = 29
+
+        vOkhttp = "4.0.1"
+        vKotlin = "1.3.41"
+        vRetrofit = "2.6.0"
+        vTestCore = "1.2.0"
+        vCoroutines = "1.2.1"
+
+        def keystorePropertiesFile = rootProject.file("keystore.properties")
+        keystoreProperties = new Properties()
+        keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+    }
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://maven.fabric.io/public" }
+    }
+    dependencies {
+        classpath "io.fabric.tools:gradle:1.29.0"
+        classpath "com.android.tools.build:gradle:3.4.2"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$vKotlin"
+    }
+}
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://maven.fabric.io/public" }
+    }
+}
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
