@@ -10,6 +10,7 @@ import com.crashlytics.android.answers.Answers
 import com.crashlytics.android.answers.CustomEvent
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 /** Singleton to handle simple analytics */
 object Analytics {
@@ -17,15 +18,6 @@ object Analytics {
     private val frequencyMap = SimpleArrayMap<String, Long>()
     private val format = SimpleDateFormat("MM-dd HH:mm", Locale.ENGLISH)
     private val date = Date()
-
-    private fun getPreviousTimestamp(key: String): Long {
-        var timestamp = frequencyMap[key]
-        if (timestamp == null) {
-            timestamp = System.currentTimeMillis()
-            frequencyMap.put(key, timestamp)
-        }
-        return timestamp
-    }
 
     fun startOf(target: Any) {
         when (target) {
@@ -61,13 +53,22 @@ object Analytics {
         putCustomAttribute("available", available.toString())
     }
 
+    private fun getPreviousTimestamp(key: String): Long {
+        var timestamp = frequencyMap[key]
+        if (timestamp == null) {
+            timestamp = System.currentTimeMillis()
+            frequencyMap.put(key, timestamp)
+        }
+        return timestamp
+    }
+
     private fun logCustom(eventName: String, block: CustomEvent.() -> Unit) {
         val event = CustomEvent(eventName)
         event.block()
 
         val previous = getPreviousTimestamp(eventName)
         val current = System.currentTimeMillis()
-        val frequency = current - previous
+        val frequency = TimeUnit.MILLISECONDS.toSeconds(current - previous)
 
         frequencyMap.put(eventName, current)
 

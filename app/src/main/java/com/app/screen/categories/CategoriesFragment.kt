@@ -18,15 +18,21 @@ import com.app.ui.OnPageSelectedListener
 import com.app.utility.Analytics
 import com.app.utility.InternetAvailableLiveData
 import com.app.utility.observeInternetStatus
+import org.jetbrains.annotations.TestOnly
 
 /** Class that describes view for timeline list */
 class CategoriesFragment : BaseFragment<CategoriesVM>(), OnClickListener, OnPageSelectedListener {
 
     companion object {
 
+        private const val targetTag = "categories"
+
         private const val EXTRA_CURRENT_PAGE_POSITION = "EXTRA_CURRENT_PAGE_POSITION"
 
         fun newInstance() = CategoriesFragment()
+
+        @TestOnly
+        fun getTargetTag() = targetTag
     }
 
     private lateinit var miNoInternet: MenuItem
@@ -110,5 +116,5 @@ class CategoriesFragment : BaseFragment<CategoriesVM>(), OnClickListener, OnPage
             miNoInternet.isVisible = available != true
     }
 
-    override fun toString(): String = "categories"
+    override fun toString(): String = targetTag
 }

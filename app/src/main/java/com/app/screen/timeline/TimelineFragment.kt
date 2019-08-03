@@ -14,6 +14,7 @@ import com.app.global.withArguments
 import com.app.global.withViewModel
 import com.app.ui.expectation.TimelineItem
 import com.app.utility.Analytics
+import org.jetbrains.annotations.TestOnly
 
 /** Class that describes view for timeline list */
 class TimelineFragment : BaseFragment<TimelineVM>() {
@@ -24,6 +25,14 @@ class TimelineFragment : BaseFragment<TimelineVM>() {
 
         fun newInstance(category: CategoryModel) = withArguments<TimelineFragment> {
             putParcelable(EXTRA_CATEGORY, category)
+        }
+
+        @TestOnly
+        fun newArguments(category: CategoryModel): Bundle {
+            val bundle = Bundle(1)
+            bundle.putParcelable(EXTRA_CATEGORY, category)
+
+            return bundle
         }
     }
 

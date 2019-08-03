@@ -19,8 +19,7 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
     protected lateinit var vm: VM
         private set
 
-    protected var binding: ViewDataBinding? = null
-        protected set
+    private var binding: ViewDataBinding? = null
 
     override fun onCreate(b: Bundle?) {
         super.onCreate(b)
@@ -87,5 +86,10 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
     protected fun start(fragment: Fragment, toBackStack: Boolean = true) {
         val activity = activity as? BaseActivity ?: return
         activity.start(fragment, toBackStack)
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    protected fun <B : ViewDataBinding> withBinding(block: B.() -> Unit) {
+        (binding as? B)?.block()
     }
 }

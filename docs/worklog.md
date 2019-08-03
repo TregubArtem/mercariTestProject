@@ -1,3 +1,7 @@
+# 2019-08-03
+* 2 hours
+    * Implement instrumental tests for categories and timeline screens
+
 # 2019-08-02
 * 10 minutes
     * Implement unit tests for ui expectations

@@ -83,7 +83,7 @@
             android:id="@+id/tvLikes"
             style="@style/Timeline.Item.Value"
             android:hint="@string/timeline_default_value"
-            android:text="@{String.valueOf(item.commentsCount)}"
+            android:text="@{Integer.toString(item.commentsCount)}"
             app:layout_constraintStart_toEndOf="@+id/ivLikes"
             tools:ignore="MissingConstraints"
             tools:text="100"/>
@@ -101,7 +101,7 @@
             android:id="@+id/tvComments"
             style="@style/Timeline.Item.Value"
             android:hint="@string/timeline_default_value"
-            android:text="@{String.valueOf(item.likesCount)}"
+            android:text="@{Integer.toString(item.likesCount)}"
             app:layout_constraintStart_toEndOf="@+id/ivComments"
             tools:ignore="MissingConstraints"
             tools:text="100"/>
