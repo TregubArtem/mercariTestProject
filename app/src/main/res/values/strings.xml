@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">mer-CAR-i</string>
+    <string name="app_name" translatable="false">Timeline</string>
     
     <string name="timeline_default_value" translatable="false">0</string>
     <string name="timeline_price_format" translatable="false">$ %1$s</string>

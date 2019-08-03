@@ -15,7 +15,7 @@ android {
         minSdkVersion minSdk
         targetSdkVersion targetSdk
 
-        versionCode 2
+        versionCode 3
         versionName "0"
 
         resConfigs "en", "ja"
