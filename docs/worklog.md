@@ -1,3 +1,8 @@
+# 2019-08-04
+* 15 minutes
+    * Increment version code for new build
+    * Change launcher icon for application to custom one because of Google Play rejection
+
 # 2019-08-03
 * 5 minutes
     * Change name of application and increment version code because of Google Play publish rejection
