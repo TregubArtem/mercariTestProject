@@ -23,10 +23,8 @@ object Analytics {
         when (target) {
             is App      -> logCustom("applicationStart") {
                 putCustomAttribute("model", Build.MODEL)
-                putCustomAttribute("manufacturer", Build.MANUFACTURER)
-
                 putCustomAttribute("sdkCode", Build.VERSION.SDK_INT)
-                putCustomAttribute("sdkName", Build.VERSION.CODENAME)
+                putCustomAttribute("manufacturer", Build.MANUFACTURER)
 
                 putCustomAttribute("appFlavor", BuildConfig.FLAVOR)
                 putCustomAttribute("appCode", BuildConfig.VERSION_CODE)

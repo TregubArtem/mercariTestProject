@@ -11,6 +11,7 @@
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
     
     <Space
+        android:id="@+id/spaceSquare"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

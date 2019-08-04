@@ -1,6 +1,11 @@
 # 2019-08-04
 * 15 minutes
     * Increment version code for new build
+    * Fix of crash for Nexus 5X 8.1.0 with unclear reason
+    * Give all views in xml id value
+    * Remove resource duplication for camera icon - leaved only svg
+* 15 minutes
+    * Increment version code for new build
     * Change launcher icon for application to custom one because of Google Play rejection
 
 # 2019-08-03
