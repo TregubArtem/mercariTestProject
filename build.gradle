@@ -4,7 +4,7 @@ buildscript {
         targetSdk = 29
 
         vOkhttp = "4.0.1"
-        vKotlin = "1.3.41"
+        vKotlin = "1.3.61"
         vRetrofit = "2.6.0"
         vTestCore = "1.2.0"
         vCoroutines = "1.2.1"
@@ -19,8 +19,8 @@ buildscript {
         maven { url "https://maven.fabric.io/public" }
     }
     dependencies {
-        classpath "io.fabric.tools:gradle:1.29.0"
-        classpath "com.android.tools.build:gradle:3.4.2"
+        classpath "io.fabric.tools:gradle:1.31.0"
+        classpath "com.android.tools.build:gradle:3.5.3"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$vKotlin"
     }
 }
