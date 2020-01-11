@@ -1,6 +1,6 @@
-# Task: “Create a Mini Mercari App”
+# Task: "Create a eShop App"
 
-Given a specific hypothetical situation, implement an app imitating Mercari’s timeline.
+Given a specific hypothetical situation, implement an app imitating timeline.
 
 ## Hypothetical Situations
 

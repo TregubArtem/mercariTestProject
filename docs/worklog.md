@@ -1,4 +1,4 @@
-# 2019-08-04
+# 6 day
 * 15 minutes
     * Increment version code for new build
     * Fix of crash for Nexus 5X 8.1.0 with unclear reason
@@ -8,7 +8,7 @@
     * Increment version code for new build
     * Change launcher icon for application to custom one because of Google Play rejection
 
-# 2019-08-03
+# 5 day
 * 5 minutes
     * Change name of application and increment version code because of Google Play publish rejection
 * 5 minutes
@@ -36,7 +36,7 @@
 * 2 hours
     * Implement instrumental tests for categories and timeline screens
 
-# 2019-08-02
+# 4 day
 * 10 minutes
     * Implement unit tests for ui expectations
 * 5 minutes
@@ -60,7 +60,7 @@
     * Complete wrapping of timeline screen with view binding
     * Fix few crashes related to screen state change
 
-# 2019-08-01
+# 3 day
 * 30 minutes
     * Start implement binding for timeline screen
     * Implement view data binding abstraction
@@ -78,7 +78,7 @@
     * Rename classes respectively task description
     * Implement basic abstraction for common classes
 
-# 2019-07-31
+# 2 day
 * 1 hour
     * Add progress indicator for timeline tabs screen
     * Implement view model for timeline tabs screen
@@ -89,7 +89,7 @@
     * Implement basic tabs and list fragments
     * Group classes by packages
 
-# 2019-07-30
+# 1 day
 * 45 minutes
     * Implement pager adapter for fragments
     * Implement sealed class for timeline types
