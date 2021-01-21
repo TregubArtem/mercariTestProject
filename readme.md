@@ -34,5 +34,5 @@
 ## Links on application
 Application can be tested not only by assembling from the source codes,
     but as well with follow links:
-1. [Google Play](https://play.google.com/apps/testing/tregub.eShop) - using that link you can register as beta tester on Google Play
+1. [Google Play](https://play.google.com/store/apps/details?id=tregub.miniMercariApp) - using that link you can register as beta tester on Google Play
     and get access to application in simplest and quickest way
